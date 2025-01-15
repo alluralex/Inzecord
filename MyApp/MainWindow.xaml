@@ -6,9 +6,12 @@
         xmlns:local="clr-namespace:MyApp"
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
+        ResizeMode="CanResizeWithGrip" 
+        AllowsTransparency="True"
         WindowStyle="None"
         Icon="favicon2.ico"
-        Title="MainWindow" MinHeight="500" Height="500" MinWidth="950" Width="950">
+        Background="#333"
+        Title="Inzecord" MinHeight="500" Height="500" MinWidth="950" Width="950">
     <Grid>
         <!--#region гриды-->
         <Grid.RowDefinitions>
@@ -18,7 +21,7 @@
         <!--#endregion-->
         <!--#region верхняя панель-->
         <Grid>
-            <Border Background="#333" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Top" MouseDown="Toolbar_MouseDown">
+            <Border Background="#333" Height="20" Padding="10,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" MouseDown="Toolbar_MouseDown">
                 <DockPanel LastChildFill="True">
                     <!-- Кнопка закрытия -->
                     <Button Content="✕" Width="20" Height="20" Background="Transparent" Foreground="White" BorderThickness="0"
@@ -31,7 +34,7 @@
                         DockPanel.Dock="Right" Click="MinimizeApp_Click"/>
                     <!-- Логотип и название -->
                     <DockPanel>
-                        <TextBlock Text="INZEWORLD" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="16" Margin="10,0,0,0"/>
+                        <TextBlock Text="Inzecord" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="16" Margin="10,0,0,0"/>
                     </DockPanel>
                 </DockPanel>
             </Border>
@@ -43,16 +46,17 @@
         </DockPanel>
         <!--#endregion-->
         <!--#region Загрузка-->
-        <Grid Grid.Row="1" Name="LoadingScreen" Background="#333333" Opacity="0.9">
+        <Grid Grid.Row="1" Name="LoadingScreen" Background="#1A1617" Opacity="0.9">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <!-- Логотип с названием-->
                 <DockPanel>
-                    <TextBlock Text="INZEWORLD" Foreground="White" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <TextBlock Text="Inzecord" Foreground="White" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" />
                 </DockPanel>
                 <!-- Текст загрузки -->
                 <TextBlock Text="Загрузка..." Foreground="White" FontSize="18" HorizontalAlignment="Center" Margin="0,10,0,0" />
                 <!-- Прогресс бар -->
                 <ProgressBar IsIndeterminate="True" Width="200" Height="10" Margin="0,20,0,0" />
+                    
             </StackPanel>
         </Grid>
         <!--#endregion-->

@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Web.WebView2;
 using Microsoft.Web.WebView2.Core;
+using System.Windows.Media.Animation;
 
 namespace MyApp
 {
@@ -92,7 +93,13 @@ namespace MyApp
         {
             if (e.IsSuccess)
             {
-                webView.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
+                var fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1));
+                fadeOut.Completed += (s, _) =>
+                {
+                    LoadingScreen.Visibility = Visibility.Collapsed;
+                    webView.Visibility = Visibility.Visible;
+                };
+                LoadingScreen.BeginAnimation(UIElement.OpacityProperty, fadeOut);
             }
             else
             {
