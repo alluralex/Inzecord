@@ -24,6 +24,8 @@ namespace MyApp
         {
             InitializeComponent();
 
+            StartLoadingAnimation();
+
             IsWebView2RuntimeInstalled();
 
             webView.CoreWebView2InitializationCompleted += WebView_CoreWebView2InitializationCompleted;
@@ -32,15 +34,27 @@ namespace MyApp
             var env = CoreWebView2Environment.CreateAsync();
 
             //Если приложение не запускается - выведется ошибка в messagebox
-            
-            webView.CoreWebView2InitializationCompleted += (s, e) =>
+
+            webView.CoreWebView2InitializationCompleted += (sender, args) =>
             {
-                if (!e.IsSuccess)
+                if (args.IsSuccess)
                 {
-                    MessageBox.Show($"Ошибка инициализации WebView2: {e.InitializationException.Message}");
+                    var coreWebView2 = webView.CoreWebView2;
+
+                    // Отключить DevTools
+                    coreWebView2.Settings.AreDevToolsEnabled = false;
+
+                    // Скрыть статусную строку
+                    coreWebView2.Settings.IsStatusBarEnabled = false;
+
+                    // Заблокировать изменение масштаба
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка инициализации WebView2!");
                 }
             };
-            webView.Source = new Uri("https://app.inzecord.ru/login.html");
+            webView.Source = new Uri("https://app.inzecord.ru/channels/@me");
         }
 
         //Проверка на то, что установлено ли у человека MicrosoftEdge
@@ -52,7 +66,23 @@ namespace MyApp
                 return key != null && key.GetSubKeyNames().Length > 0;
             }
         }
-        
+
+        //Анимация кручения загрузки
+        private void StartLoadingAnimation()
+        {
+            // Создать анимацию вращения
+            var rotationAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 360,
+                Duration = TimeSpan.FromSeconds(3),
+                RepeatBehavior = RepeatBehavior.Forever
+            };
+
+            // Запустить анимацию
+            LoadingRotate.BeginAnimation(System.Windows.Media.RotateTransform.AngleProperty, rotationAnimation);
+        }
+
         #region верхний тулбар
         private void CloseApp_Click(object sender, RoutedEventArgs e)
         {
