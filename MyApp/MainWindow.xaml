@@ -1,4 +1,4 @@
-﻿<Window x:Class="MyApp.MainWindow"
+<Window x:Class="MyApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,56 +9,66 @@
         ResizeMode="CanResizeWithGrip" 
         AllowsTransparency="True"
         WindowStyle="None"
+		BorderBrush="#333"
+		BorderThickness="3"
         Icon="favicon2.ico"
         Background="#333"
         Title="Inzecord" MinHeight="500" Height="500" MinWidth="950" Width="950">
-    <Grid>
-        <!--#region гриды-->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <!--#endregion-->
-        <!--#region верхняя панель-->
-        <Grid>
-            <Border Background="#333" Height="20" Padding="10,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" MouseDown="Toolbar_MouseDown">
-                <DockPanel LastChildFill="True">
-                    <!-- Кнопка закрытия -->
-                    <Button Content="✕" Width="20" Height="20" Background="Transparent" Foreground="White" BorderThickness="0"
+	<WindowChrome.WindowChrome>
+		<WindowChrome     
+        CaptionHeight="1"  
+		CornerRadius ="1"
+		ResizeBorderThickness="8,4,8,4"         
+        GlassFrameThickness="13,5,13,5">
+		</WindowChrome>
+	</WindowChrome.WindowChrome>
+	<Grid>
+		<!--#region гриды-->
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<!--#endregion-->
+		<!--#region верхняя панель-->
+		<Grid>
+			<Border Background="#333" Height="20" Padding="10,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" MouseDown="Toolbar_MouseDown">
+				<DockPanel LastChildFill="True">
+					<!-- Кнопка закрытия -->
+					<Button Content="✕" Width="20" Height="20" Background="Transparent" Foreground="White" BorderThickness="0"
                         DockPanel.Dock="Right" Click="CloseApp_Click"/>
-                    <!-- Кнопка полного экрана -->
-                    <Button Content="ㅁ" Width="20" Height="20" Background="Transparent" Foreground="White" BorderThickness="0"
+					<!-- Кнопка полного экрана -->
+					<Button Content="ㅁ" Width="20" Height="20" Background="Transparent" Foreground="White" BorderThickness="0"
                         DockPanel.Dock="Right" Click="FullScreen_Click"/>
-                    <!-- Кнопка свернуть -->
-                    <Button Content="−" Width="20" Height="20" Background="Transparent" Foreground="White" BorderThickness="0"
+					<!-- Кнопка свернуть -->
+					<Button Content="−" Width="20" Height="20" Background="Transparent" Foreground="White" BorderThickness="0"
                         DockPanel.Dock="Right" Click="MinimizeApp_Click"/>
-                    <!-- Логотип и название -->
-                    <DockPanel>
-                        <TextBlock Text="Inzecord" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="16" Margin="10,0,0,0"/>
-                    </DockPanel>
-                </DockPanel>
-            </Border>
-        </Grid>
-        <!--#endregion-->
-        <!--#region Веб приложение-->
-        <DockPanel Grid.Row="1">
-            <wv2:WebView2 Name="webView"/>
-        </DockPanel>
-        <!--#endregion-->
-        <!--#region Загрузка-->
-        <Grid Grid.Row="1" Name="LoadingScreen" Background="#1A1617" Opacity="0.9">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <!-- Логотип с названием-->
-                <DockPanel>
-                    <TextBlock Text="Inzecord" Foreground="White" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" />
-                </DockPanel>
-                <!-- Текст загрузки -->
-                <TextBlock Text="Загрузка..." Foreground="White" FontSize="18" HorizontalAlignment="Center" Margin="0,10,0,0" />
-                <!-- Прогресс бар -->
-                <ProgressBar IsIndeterminate="True" Width="200" Height="10" Margin="0,20,0,0" />
-                    
-            </StackPanel>
-        </Grid>
-        <!--#endregion-->
-    </Grid>
+					<!-- Логотип и название -->
+					<DockPanel>
+						<TextBlock Text="Inzecord" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="16" Margin="10,0,0,0"/>
+					</DockPanel>
+				</DockPanel>
+			</Border>
+		</Grid>
+		<!--#endregion-->
+		<!--#region Веб приложение-->
+		<DockPanel Grid.Row="1">
+			<wv2:WebView2 Name="webView"/>
+		</DockPanel>
+		<!--#endregion-->
+		<!--#region Загрузка-->
+		<Grid Grid.Row="1" Name="LoadingScreen" Background="#1A1617" Opacity="0.9">
+			<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+				<!-- Логотип с названием-->
+				<DockPanel>
+					<TextBlock Text="Inzecord" Foreground="White" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" />
+				</DockPanel>
+				<!-- Текст загрузки -->
+				<TextBlock Text="Загрузка..." Foreground="White" FontSize="18" HorizontalAlignment="Center" Margin="0,10,0,0" />
+				<!-- Прогресс бар -->
+				<ProgressBar IsIndeterminate="True" Width="200" Height="10" Margin="0,20,0,0" />
+
+			</StackPanel>
+		</Grid>
+		<!--#endregion-->
+	</Grid>
 </Window>
