@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyApp"
-        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf" xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         ResizeMode="CanResizeWithGrip" 
         AllowsTransparency="True"
@@ -23,6 +23,7 @@
         </WindowChrome>
     </WindowChrome.WindowChrome>
     <Grid>
+
         <!--#region гриды-->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -31,6 +32,19 @@
         <!--#endregion-->
         <!--#region верхняя панель-->
         <Grid>
+            <tb:TaskbarIcon 
+            IconSource="favicon2.ico"
+            ToolTipText="Моё приложение"
+            TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown">
+                <tb:TaskbarIcon.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Включить автозапуск" Click="AutoAppPlay_Click"/>
+                        <MenuItem Header="Открыть" Click="OpenApp_Click"/>
+                        <MenuItem Header="Закрыть" Click="ExitApp_Click"/>
+                        <MenuItem Header="Выключить автозапуск" Click="Anti_AutoAppPlay_Click"/>
+                    </ContextMenu>
+                </tb:TaskbarIcon.ContextMenu>
+            </tb:TaskbarIcon>
             <Border Background="#141718" Height="20" Padding="10,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" MouseDown="Toolbar_MouseDown">
                 <DockPanel LastChildFill="True">
                     <!-- Кнопка закрытия -->
@@ -44,7 +58,7 @@
                         DockPanel.Dock="Right" Click="MinimizeApp_Click"/>
                     <!-- Логотип и название -->
                     <DockPanel>
-                        <Viewbox Stretch="Fill" Height="15" Width="65" HorizontalAlignment="Left">
+                        <Viewbox Stretch="Fill" Height="10" Width="45" HorizontalAlignment="Left">
                             <TextBlock Text="Inzecord" Foreground="#858B97" FontWeight="Bold"/>
                         </Viewbox>
                     </DockPanel>

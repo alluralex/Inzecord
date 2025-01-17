@@ -12,6 +12,8 @@ using System.Windows.Shapes;
 using Microsoft.Web.WebView2;
 using Microsoft.Web.WebView2.Core;
 using System.Windows.Media.Animation;
+using Microsoft.Win32;
+using System.IO;
 
 namespace MyApp
 {
@@ -20,6 +22,9 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        string appName = "Inzecord"; // Уникальное имя вашего приложения
+        string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location; // Путь к исполняемому файлу приложения
+
         public MainWindow()
         {
             InitializeComponent();
@@ -83,10 +88,23 @@ namespace MyApp
             LoadingRotate.BeginAnimation(System.Windows.Media.RotateTransform.AngleProperty, rotationAnimation);
         }
 
+        private void TaskbarIcon_TrayLeftMouseDown(object sender, RoutedEventArgs e)
+        {
+            // Если окно скрыто, показываем его
+            if (this.Visibility != Visibility.Visible)
+            {
+                this.Show();
+                this.WindowState = WindowState.Normal; // Восстанавливаем, если свернуто
+            }
+
+            // Делаем окно активным
+            this.Activate();
+        }
+
         #region верхний тулбар
         private void CloseApp_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Hide();
         }
         private void FullScreen_Click(object sender, RoutedEventArgs e)
         {
@@ -115,6 +133,10 @@ namespace MyApp
                 if (WindowState == WindowState.Maximized)
                 {
                     WindowState = WindowState.Normal;
+                }
+                else if (WindowState == WindowState.Normal && e.ClickCount == 2)
+                {
+                    WindowState = WindowState.Maximized;
                 }
                 DragMove();
             }
@@ -152,6 +174,52 @@ namespace MyApp
             {
                 MessageBox.Show("Ошибка загрузки сайта: " + e.WebErrorStatus);
             }
+        }
+
+        private void OpenApp_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Show();
+            Application.Current.MainWindow.WindowState = WindowState.Normal;
+        }
+
+        private void ExitApp_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void AutoAppPlay_Click(object sender, RoutedEventArgs e)
+        {
+            EnableAutoStart(appName, appPath);
+        }
+
+        public static void EnableAutoStart(string appName, string appPath)
+        {
+            // Открываем ключ реестра для автозагрузки текущего пользователя
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+            {
+                // Если ключ существует, добавляем приложение
+                if (key != null)
+                {
+                    key.SetValue(appName, appPath);
+                }
+            }
+        }
+
+        public static void DisableAutoStart(string appName)
+        {
+            // Открываем ключ реестра для автозагрузки текущего пользователя
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+            {
+                // Если ключ существует, удаляем приложение
+                if (key != null && key.GetValue(appName) != null)
+                {
+                    key.DeleteValue(appName);
+                }
+            }
+        }
+        private void Anti_AutoAppPlay_Click(object sender, RoutedEventArgs e)
+        {
+            DisableAutoStart(appName);
         }
     }
 }
