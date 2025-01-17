@@ -112,6 +112,10 @@ namespace MyApp
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
+                if (WindowState == WindowState.Maximized)
+                {
+                    WindowState = WindowState.Normal;
+                }
                 DragMove();
             }
         }
