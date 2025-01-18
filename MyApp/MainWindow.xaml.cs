@@ -22,6 +22,8 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static Mutex _mutex;
+
         string appName = "Inzecord";
         string appPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
 
@@ -71,6 +73,7 @@ namespace MyApp
                 return key != null && key.GetSubKeyNames().Length > 0;
             }
         }
+
 
         //Анимация кручения загрузки
         private void StartLoadingAnimation()
