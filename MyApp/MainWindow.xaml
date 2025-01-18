@@ -45,16 +45,16 @@
                     </ContextMenu>
                 </tb:TaskbarIcon.ContextMenu>
             </tb:TaskbarIcon>
-            <Border Background="#141718" Height="20" Padding="10,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" MouseDown="Toolbar_MouseDown">
+            <Border Background="#141718" Height="25" Padding="10,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" MouseDown="Toolbar_MouseDown">
                 <DockPanel LastChildFill="True">
                     <!-- Кнопка закрытия -->
-                    <Button Content="✕" Width="20" Height="20" Background="Transparent" Foreground="White" BorderThickness="0"
+                    <Button Content="✕" Width="25" Height="25" Background="Transparent" Foreground="White" BorderThickness="0"
                         DockPanel.Dock="Right" Click="CloseApp_Click"/>
                     <!-- Кнопка полного экрана -->
-                    <Button Content="ㅁ" Width="20" Height="20" Background="Transparent" Foreground="White" BorderThickness="0"
+                    <Button Content="ㅁ" Width="25" Height="25" Background="Transparent" Foreground="White" BorderThickness="0"
                         DockPanel.Dock="Right" Click="FullScreen_Click"/>
                     <!-- Кнопка свернуть -->
-                    <Button Content="−" Width="20" Height="20" Background="Transparent" Foreground="White" BorderThickness="0"
+                    <Button Content="−" Width="25" Height="25" Background="Transparent" Foreground="White" BorderThickness="0"
                         DockPanel.Dock="Right" Click="MinimizeApp_Click"/>
                     <!-- Логотип и название -->
                     <DockPanel>

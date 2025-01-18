@@ -22,8 +22,8 @@ namespace MyApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        string appName = "Inzecord"; // Уникальное имя вашего приложения
-        string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location; // Путь к исполняемому файлу приложения
+        string appName = "Inzecord";
+        string appPath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
 
         public MainWindow()
         {
